@@ -6,7 +6,7 @@ export class TargetAccount extends React.Component {
     this.state = {
       btcAddress: "",
       apiLink: "http://chart.googleapis.com/chart?chs=200x200&cht=qr&chl=",
-      monitoring: false
+      message: ''
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -18,7 +18,8 @@ export class TargetAccount extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value
+      [name]: value,
+      message: ""
     })
   }
 
@@ -29,10 +30,31 @@ export class TargetAccount extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.setState({
-      monitoring: true
+      message: 'Monitoring...'
     })
-  }
+    let targetAccount = this;
+    let btcs = new WebSocket("wss://ws.blockchain.info/inv");
+    btcs.onopen = function() {
+      btcs.send(JSON.stringify({"op":"addr_sub", "addr":targetAccount.state.btcAddress}));
+    };
 
+    btcs.onmessage = function(onmsg) {
+      let response = JSON.parse(onmsg.data);
+      let getOuts = response.x.out;
+      let countOuts = getOuts.length;
+      for(let i=0; i<countOuts; i++) {
+        let outAdd = response.x.out[i].addr;
+        if(outAdd === targetAccount.state.btcAddress) {
+          let amount = response.x.out[1].value;
+          let calcAmount = amount/ 100000000;
+          targetAccount.setState({
+            message: "Received: " + calcAmount + "BTC"
+          })
+        }
+      }
+    }
+
+  }
 
   render() {
     return (
@@ -53,9 +75,10 @@ export class TargetAccount extends React.Component {
             </div>
           </form>
         </div>
+        <h4 style={{fontSize: 12}}>Hit "Monitor" to listen for transfer confirmations for the target account</h4>
         <img src={this.buildLink()} alt="qr-code"/>
         <div>{this.state.btcAddress}</div>
-        <div id="websocket">{this.state.monitoring? "Monitoring..." : ""}</div>
+        <div id="websocket">{this.state.message}</div>
       </div>
     )
   }
