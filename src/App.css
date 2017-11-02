@@ -7,12 +7,20 @@
   margin:auto;
 }
 
+.instructions ul{
+  margin-top: 10px;
+}
+
 .instructions li{
-  padding: 10px;
+  padding: 2px;
   text-align: left;
 }
 
 .title {
   width:550px;
   margin: auto;
+}
+
+p {
+  font-size: 12px;
 }

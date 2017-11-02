@@ -77,19 +77,19 @@ export class TargetAccount extends React.Component {
             </div>
           </form>
         </div>
-        <h4 style={{fontSize: 12}}>Hit "Monitor" to listen for transfer confirmations for the target account</h4>
+        <p>Hit "Monitor" to listen for transfer confirmations for the target account</p>
         <img src={this.buildLink()} alt="qr-code"/>
         <div>{this.state.btcAddress}</div>
         <div id="websocket">{this.state.message}</div>
         <div><strong>BitListener allows you to listen for blockchain confirmations on a bitcoin transaction</strong></div>
         <div className="instructions text-center">
           <ul>
-            <li>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</li>
-            <li>Press "Monitor".</li>
-            <li>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.
+            <li><p>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</p></li>
+            <li><p>Press "Monitor".</p></li>
+            <li><p>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.
               <br />
               BitListener is run entirely on the front-end, if you refresh the page you will lose the monitoring.
-            </li>
+            </p></li>
           </ul>
         </div>
       </div>
