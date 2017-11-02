@@ -1,3 +1,18 @@
 .target-input {
   width: 400px;
 }
+
+.instructions {
+  width: 400px;
+  margin:auto;
+}
+
+.instructions li{
+  padding: 10px;
+  text-align: left;
+}
+
+.title {
+  width:550px;
+  margin: auto;
+}
