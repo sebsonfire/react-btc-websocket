@@ -48,7 +48,7 @@ export class TargetAccount extends React.Component {
           let amount = response.x.out[1].value;
           let calcAmount = amount/ 100000000;
           targetAccount.setState({
-            message: "Received: " + calcAmount + "BTC"
+            message: "Received: " + calcAmount + " BTC"
           })
         }
       }
@@ -63,7 +63,9 @@ export class TargetAccount extends React.Component {
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
             <div className='form-group'>
               <label htmlFor="inputTargetAccount"> </label>
-              <input  name="btcAddress"
+              <input  className="target-input"
+                      name="btcAddress"
+                      style={{textAlign: "center"}}
                       type="text"
                       placeholder="Enter public key"
                       id="inputTargetAccount"
