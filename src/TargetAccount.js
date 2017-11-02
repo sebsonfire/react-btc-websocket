@@ -55,7 +55,7 @@ export class TargetAccount extends React.Component {
             </div>
           </form>
         </div>
-        <p>Hit "Monitor" to listen for transfer confirmations for the target account</p>
+        <p>Hit "Add Listener" to listen for transfer confirmations for the target account</p>
         <img src={this.buildLink(this.state.apiLink, this.state.btcAddress)} alt="qr-code"/>
       </div>
     )
