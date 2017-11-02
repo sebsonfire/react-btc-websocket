@@ -18,42 +18,20 @@ export class TargetAccount extends React.Component {
     const name = target.name;
 
     this.setState({
-      [name]: value,
-      message: ""
+      [name]: value
     })
   }
 
-  buildLink() {
-    return this.state.apiLink + this.state.btcAddress;
+  buildLink(apiLink, btcAddress) {
+    return apiLink + btcAddress;
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    this.props.onAddListener(this.state);
     this.setState({
-      message: 'Monitoring...'
+      btcAddress: ""
     })
-    let targetAccount = this;
-    let btcs = new WebSocket("wss://ws.blockchain.info/inv");
-    btcs.onopen = function() {
-      btcs.send(JSON.stringify({"op":"addr_sub", "addr":targetAccount.state.btcAddress}));
-    };
-
-    btcs.onmessage = function(onmsg) {
-      let response = JSON.parse(onmsg.data);
-      let getOuts = response.x.out;
-      let countOuts = getOuts.length;
-      for(let i=0; i<countOuts; i++) {
-        let outAdd = response.x.out[i].addr;
-        if(outAdd === targetAccount.state.btcAddress) {
-          let amount = response.x.out[1].value;
-          let calcAmount = amount/ 100000000;
-          targetAccount.setState({
-            message: "Received: " + calcAmount + " BTC"
-          })
-        }
-      }
-    }
-
   }
 
   render() {
@@ -73,25 +51,12 @@ export class TargetAccount extends React.Component {
                       onChange={this.handleInputChange}></input>
             </div>
             <div className="form-group">
-              <button type='submit' className="btn btn-success">Monitor</button>
+              <button type='submit' className="btn btn-success">Add Listener</button>
             </div>
           </form>
         </div>
         <p>Hit "Monitor" to listen for transfer confirmations for the target account</p>
-        <img src={this.buildLink()} alt="qr-code"/>
-        <div>{this.state.btcAddress}</div>
-        <div id="websocket">{this.state.message}</div>
-        <div><strong>BitListener allows you to listen for blockchain confirmations on a bitcoin transaction</strong></div>
-        <div className="instructions text-center">
-          <ul>
-            <li><p>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</p></li>
-            <li><p>Press "Monitor".</p></li>
-            <li><p>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.
-              <br />
-              BitListener is run entirely on the front-end, if you refresh the page you will lose the monitoring.
-            </p></li>
-          </ul>
-        </div>
+        <img src={this.buildLink(this.state.apiLink, this.state.btcAddress)} alt="qr-code"/>
       </div>
     )
   }
