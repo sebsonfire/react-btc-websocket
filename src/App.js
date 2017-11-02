@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {TargetAccount} from './TargetAccount';
 
-var listeners = [
-
-];
+var listeners = [];
 
 class App extends Component {
 
@@ -21,10 +19,24 @@ class App extends Component {
     return apiLink + btcAddress
   }
 
+  handleResponse(calcAmount, address) {
+    console.log('inside handleResponse')
+    let newListeners = this.state.listeners;
+    for(var i in newListeners) {
+      if(newListeners[i].btcAddress === address){
+        console.log("inside for loop")
+        newListeners[i].message = "Received: " + calcAmount + " BTC";
+      }
+    }
+    this.setState({listeners: newListeners });
+    console.log("finished handleResponse");
+    console.log(this.state.listeners)
+  }
+
   handleAddListener(listener) {
-    this.setState({listeners: [...this.state.listeners, listener]});
     console.log(listener)
     listener.message = 'Monitoring...';
+    let app = this;
     let btcs = new WebSocket("wss://ws.blockchain.info/inv");
     btcs.onopen = function() {
       btcs.send(JSON.stringify({"op":"addr_sub", "addr":listener.btcAddress}));
@@ -39,11 +51,13 @@ class App extends Component {
         if(outAdd === listener.btcAddress) {
           let amount = response.x.out[1].value;
           let calcAmount = amount/ 100000000;
-          listener.message = "Received: " + calcAmount + " BTC";
+          let address = listener.btcAddress;
+          app.handleResponse(calcAmount, address);
           console.log(response);
         }
       }
     }
+    this.setState({listeners: [...this.state.listeners, listener]});
     console.log(listener);
   }
 
@@ -64,15 +78,16 @@ class App extends Component {
             <div className="instructions text-center">
               <ul>
                 <li><p>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</p></li>
-                <li><p>Press "Monitor".</p></li>
+                <li><p>Press "Add Listener".</p></li>
                 <li><p>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.
+                <li><p>You can add as many listeners as you like and BitListener will monitor all of them.</p></li>
                   <br />
                   BitListener is run entirely on the front-end, if you refresh the page you will lose the monitoring.
                 </p></li>
               </ul>
             </div>
           </div>
-          {this.state.listeners.length > 0 ? <h2>Listeners</h2> : null}
+          {this.state.listeners.length > 0 ? <h2>LISTENERS</h2> : null}
           <div>
               {this.state.listeners.map((listener, index) =>
               <div key={index}>
