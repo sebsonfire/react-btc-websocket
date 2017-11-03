@@ -68,7 +68,7 @@ class App extends Component {
       <div className="wrapper">
         <div className="container">
           <div className="text-center row">
-            <div className="col title">
+            <div className="col-6-md">
               <h1>MONITOR BITCOIN BLOCKCHAIN CONFIRMATIONS</h1>
             </div>
             <br />

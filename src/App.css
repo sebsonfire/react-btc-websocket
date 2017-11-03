@@ -20,9 +20,16 @@
   text-align: left;
 }
 
+.input-field {
+  padding-bottom:10px;
+}
 .title {
   width:550px;
   margin: auto;
+}
+
+.submit-btn {
+  margin-bottom: 10px;
 }
 
 p {
@@ -40,5 +47,6 @@ body {
   -moz-background-size:  cover;
   -o-background-size: cover;
   background-size: 100%;
-  padding-bottom: 50px;
+  padding: 20px 0px 50px 0px;
 }
+

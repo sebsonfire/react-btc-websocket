@@ -39,7 +39,7 @@ export class TargetAccount extends React.Component {
       <div>
         <div className="col-6">
           <form className="form-horizontal" onSubmit={this.handleSubmit}>
-            <div className='form-group'>
+            <div className="input-field">
               <label htmlFor="inputTargetAccount"> </label>
               <input  className="target-input"
                       name="btcAddress"
@@ -50,13 +50,13 @@ export class TargetAccount extends React.Component {
                       value={this.state.btcAddress}
                       onChange={this.handleInputChange}></input>
             </div>
-            <div className="form-group">
-              <button type='submit' className="btn btn-success">Add Listener</button>
+            <div>
+              <button type='submit' className="submit-btn btn btn-success">Add Listener</button>
             </div>
           </form>
         </div>
         <p>Hit "Add Listener" to listen for transfer confirmations for the target account</p>
-        <img src={this.buildLink(this.state.apiLink, this.state.btcAddress)} alt="qr-code"/>
+        <img className='main-qr' src={this.buildLink(this.state.apiLink, this.state.btcAddress)} alt="qr-code"/>
       </div>
     )
   }
