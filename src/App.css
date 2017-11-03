@@ -3,15 +3,19 @@
 }
 
 .instructions {
+  margin-top: 20px;
+}
+
+.instructions-list {
   width: 400px;
   margin:auto;
 }
 
-.instructions ul{
+.instructions-list ul{
   margin-top: 10px;
 }
 
-.instructions li{
+.instructions-list li{
   padding: 2px;
   text-align: left;
 }
@@ -22,5 +26,19 @@
 }
 
 p {
-  font-size: 12px;
+  font-size: 14px;
+}
+
+body {
+  color: white;
+  margin: 0px;
+}
+
+.wrapper {
+   background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url('https://community.nasdaq.com/uploadedimages/author/bbrooks/technology13.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size:  cover;
+  -o-background-size: cover;
+  background-size: 100%;
+  padding-bottom: 50px;
 }

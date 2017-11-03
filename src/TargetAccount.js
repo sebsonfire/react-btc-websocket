@@ -43,7 +43,7 @@ export class TargetAccount extends React.Component {
               <label htmlFor="inputTargetAccount"> </label>
               <input  className="target-input"
                       name="btcAddress"
-                      style={{textAlign: "center"}}
+                      style={{textAlign: "center", color: "black"}}
                       type="text"
                       placeholder="Enter public key"
                       id="inputTargetAccount"
