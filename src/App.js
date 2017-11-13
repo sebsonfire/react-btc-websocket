@@ -65,39 +65,41 @@ class App extends Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="container">
-          <div className="text-center row">
-            <div className="col-6-md">
-              <h1>MONITOR BITCOIN BLOCKCHAIN CONFIRMATIONS</h1>
+      <div className="container">
+        <div className='nav row'>
+          <div className='logo col-md-8 col-sm-8 col-xs-8'>
+            <h2>BitListener</h2>
+          </div>
+          <div className='github-link col-md-4 col-sm-4 col-xs-4'>
+            <a href="https://github.com/Sebastiaanvk" target="_blank"><i class="fa fa-github fa-2x" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <div className="text-center row">
+          <div>
+            <TargetAccount onAddListener={this.handleAddListener}/>
+          </div>
+          <div className="instructions">
+            <h4><strong>BitListener allows you to listen for blockchain confirmations on a bitcoin transaction</strong></h4>
+            <div className="instructions-list text-center">
+              <ul>
+                <li><p>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</p></li>
+                <li><p>Press "Add Listener".</p></li>
+                <li><p>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.</p></li>
+                <li><p>You can add as many listeners as you like and BitListener will monitor all of them.</p></li>
+                  <br />
+                  BitListener is run entirely on the front-end, if you refresh the page you will lose the monitoring.
+              </ul>
             </div>
-            <br />
-            <div>
-              <TargetAccount onAddListener={this.handleAddListener}/>
-            </div>
-            <div className="instructions">
-              <h4><strong>BitListener allows you to listen for blockchain confirmations on a bitcoin transaction</strong></h4>
-              <div className="instructions-list text-center">
-                <ul>
-                  <li><p>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</p></li>
-                  <li><p>Press "Add Listener".</p></li>
-                  <li><p>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.</p></li>
-                  <li><p>You can add as many listeners as you like and BitListener will monitor all of them.</p></li>
-                    <br />
-                    BitListener is run entirely on the front-end, if you refresh the page you will lose the monitoring.
-                </ul>
+          </div>
+          {this.state.listeners.length > 0 ? <h2>LISTENERS</h2> : null}
+          <div>
+              {this.state.listeners.map((listener, index) =>
+              <div className = 'listener' key={index}>
+                <img src={this.buildLink(listener.apiLink, listener.btcAddress)} alt="target account qr"></img>
+                <div>{listener.btcAddress}</div>
+                <div id="websocket">{listener.message}</div>
               </div>
-            </div>
-            {this.state.listeners.length > 0 ? <h2>LISTENERS</h2> : null}
-            <div>
-                {this.state.listeners.map((listener, index) =>
-                <div key={index}>
-                  <img src={this.buildLink(listener.apiLink, listener.btcAddress)} alt="target account qr"></img>
-                  <div>{listener.btcAddress}</div>
-                  <div id="websocket">{listener.message}</div>
-                </div>
-                )}
-            </div>
+              )}
           </div>
         </div>
       </div>
