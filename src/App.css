@@ -10,6 +10,17 @@ body {
 
 a { color: inherit; }
 
+li:before {
+font-family: 'FontAwesome';
+content: '\f15a';
+margin:0 5px 0 -15px;
+color: white;
+}
+
+li {
+  margin: 10px;
+}
+
 .container {
   margin-bottom: 20px;
   width: 100%;
@@ -53,7 +64,9 @@ a { color: inherit; }
 
 .input-field {
   padding-bottom:10px;
+  margin-top: 10px;
 }
+
 .title {
   width:550px;
   margin: auto;

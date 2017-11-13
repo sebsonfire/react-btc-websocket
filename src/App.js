@@ -82,10 +82,10 @@ class App extends Component {
             <h4><strong>BitListener allows you to listen for blockchain confirmations on a bitcoin transaction</strong></h4>
             <div className="instructions-list text-center">
               <ul>
-                <li><p>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</p></li>
-                <li><p>Press "Add Listener".</p></li>
-                <li><p>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.</p></li>
-                <li><p>You can add as many listeners as you like and BitListener will monitor all of them.</p></li>
+                <li>Enter the Public Key (address) of the receiving wallet before you send it Bitcoin.</li>
+                <li>Press "Add Listener".</li>
+                <li>Now you can initiate the transaction on whatever platform you are using and BitListener will notify you of confirmations as they happen.</li>
+                <li>You can add as many listeners as you like and BitListener will monitor all of them.</li>
                   <br />
                   BitListener is run entirely on the front-end, if you refresh the page you will lose the monitoring.
               </ul>
